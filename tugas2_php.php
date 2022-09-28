@@ -91,53 +91,75 @@ if(isset($_POST['jabatan'])){
 switch($jabatan){
     case 'Manager':
         $gaji = 20000000;
-        echo 'Gaji Anda = Rp.'.number_format($gaji).'</br>'; 
+
         break;
     case 'Asisten':
         $gaji = 15000000;
-        echo 'Gaji Anda = Rp.'.number_format($gaji).'</br>'; 
+
         break;
     case 'Kabag':
         $gaji = 10000000;
-        echo 'Gaji Anda = Rp.'.number_format($gaji).'</br>'; 
+
         break;
     case 'Staff':
         $gaji = 4000000;
-        echo 'Gaji Anda = Rp.'.number_format($gaji).'</br>'; 
+
         break;
 }
 $tunjab = $gaji * 0.2;
-echo 'Tunajangan Jabatan Rp.'.number_format($tunjab).'</br>';
+
 }
 if(isset($_POST['status'])){
 if($status == "Menikah"){
     if($anak <=2){
         $tunstat = $gaji * 0.05;
-        echo 'Tunajangan Status Rp.'.number_format($tunstat).'</br>';
+
     }else if($anak >=3 && $anak <= 5){
         $tunstat = $gaji * 0.1;
-        echo 'Tunajangan Status Rp.'.number_format($tunstat).'</br>';
+
     }else if($anak >= 5){
         $tunstat = $gaji * 0.15;
-        echo 'Tunajangan Status Rp.'.number_format($tunstat).'</br>';
+
     }
 }else if($status == "Single"){
     $tunstat = 0;
-    echo 'Belum dapat Tunajangan Keluarga </br>';
+
     }
 
 if(isset($_POST['submit'])){
 $gajikotor = $gaji + $tunjab + $tunstat;
-echo 'Gaji Kotor = Rp.'.number_format($gajikotor).'</br>';
+
 }
 
-$zakat = ($agama == "Islam" && $gajikotor >=6000000) ? $gajikotor * 0.025 : 0;
-echo 'Zakat = Rp.'.number_format($zakat).'</br>';
+$zakat = ($agama == "Islam" && $gajikotor >=6000000) ? $gaji * 0.025 : 0;
+
 
 $gajibersih = $gajikotor - $zakat;
-echo 'Gaji Bersih = Rp.'.number_format($gajibersih);
+
 }
 ?>
 </div>
+<table class="table">
+
+    <thead bgcolor="cyan" align="center">
+    <th  colspan="10"> Data Penghasilan </th>
+    </thead>
+    <tbody>
+        <tr>
+        <th scope="col">Gaji</th>
+        <th scope="col">Tunjangan Jabatan</th>
+        <th scope="col">Tunjangan Status</th>
+        <th scope="col">Zakat</th>
+        <th scope="col">Gaji Bersih</th>
+        </tr>
+        <tr align="center">
+        <td><?php echo 'Rp.'. number_format($gaji)?></td>
+        <td><?php echo 'Rp.'. number_format($tunjab)?></td>
+        <td><?php echo 'Rp.'. number_format($tunstat)?></td>
+        <td><?php echo 'Rp.'. number_format($zakat)?></td>
+        <td><?php echo 'Rp.'. number_format($gajibersih)?></td>
+        </tr>
+    </tbody>
+</table>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
