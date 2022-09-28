@@ -86,58 +86,6 @@
         echo 'Jumlah Anak = '. $anak .'</br>';
     }
 ?>
-<?php
-if(isset($_POST['jabatan'])){
-switch($jabatan){
-    case 'Manager':
-        $gaji = 20000000;
-
-        break;
-    case 'Asisten':
-        $gaji = 15000000;
-
-        break;
-    case 'Kabag':
-        $gaji = 10000000;
-
-        break;
-    case 'Staff':
-        $gaji = 4000000;
-
-        break;
-}
-$tunjab = $gaji * 0.2;
-
-}
-if(isset($_POST['status'])){
-if($status == "Menikah"){
-    if($anak <=2){
-        $tunstat = $gaji * 0.05;
-
-    }else if($anak >=3 && $anak <= 5){
-        $tunstat = $gaji * 0.1;
-
-    }else if($anak >= 5){
-        $tunstat = $gaji * 0.15;
-
-    }
-}else if($status == "Single"){
-    $tunstat = 0;
-
-    }
-
-if(isset($_POST['submit'])){
-$gajikotor = $gaji + $tunjab + $tunstat;
-
-}
-
-$zakat = ($agama == "Islam" && $gajikotor >=6000000) ? $gaji * 0.025 : 0;
-
-
-$gajibersih = $gajikotor - $zakat;
-
-}
-?>
 </div>
 <table class="table">
 
@@ -153,11 +101,70 @@ $gajibersih = $gajikotor - $zakat;
         <th scope="col">Gaji Bersih</th>
         </tr>
         <tr align="center">
-        <td><?php echo 'Rp.'. number_format($gaji)?></td>
-        <td><?php echo 'Rp.'. number_format($tunjab)?></td>
-        <td><?php echo 'Rp.'. number_format($tunstat)?></td>
-        <td><?php echo 'Rp.'. number_format($zakat)?></td>
-        <td><?php echo 'Rp.'. number_format($gajibersih)?></td>
+        <td><?php 
+        if(isset($_POST['jabatan'])){
+            switch($jabatan){
+            case 'Manager':
+                $gaji = 20000000;
+                echo 'Rp.'. number_format($gaji);
+                break;
+            case 'Asisten':
+                $gaji = 15000000;
+                echo 'Rp.'. number_format($gaji);
+                break;
+            case 'Kabag':
+                $gaji = 10000000;
+                echo 'Rp.'. number_format($gaji);
+                break;
+            case 'Staff':
+                $gaji = 4000000;
+                echo 'Rp.'. number_format($gaji);
+                break;
+}
+$tunjab = $gaji * 0.2;
+
+}
+        ?></td>
+        <td><?php
+        if(isset($_POST['jabatan'])){
+        echo 'Rp.'. number_format($tunjab);
+        }?></td>
+        <td><?php
+        if(isset($_POST['status'])){
+            if($status == "Menikah"){
+                if($anak <=2){
+                    $tunstat = $gaji * 0.05;
+                    echo 'Rp.'. number_format($tunstat);
+                }else if($anak >=3 && $anak <= 5){
+                    $tunstat = $gaji * 0.1;
+                    echo 'Rp.'. number_format($tunstat);
+                }else if($anak >= 5){
+                    $tunstat = $gaji * 0.15;
+                    echo 'Rp.'. number_format($tunstat);
+                }
+                }else if($status == "Single"){
+                    $tunstat = 0;
+                    echo 'Rp.'. number_format($tunstat);
+                }
+            }
+        ?></td>
+        <td><?php
+        if(isset($_POST['submit'])){
+            $gajikotor = $gaji + $tunjab + $tunstat;
+            
+            
+            
+            $zakat = ($agama == "Islam" && $gajikotor >=6000000) ? $gaji * 0.025 : 0;
+            
+            
+            $gajibersih = $gajikotor - $zakat;
+            echo 'Rp.'. number_format($zakat);
+            }
+        ?></td>
+        <td><?php 
+        if(isset($_POST['submit'])){
+        echo 'Rp.'. number_format($gajibersih);
+        }?></td>
         </tr>
     </tbody>
 </table>
