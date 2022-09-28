@@ -56,7 +56,7 @@
         </div>
 
         <div class="d-grid">
-            <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button>
+            <button class="btn btn-primary btn-lg" id="submitButton" type="submit" name="submit">Submit</button>
         </div>
     </form>
 </div>
@@ -64,39 +64,30 @@
 </div>
 <div class="alert alert-warning" role="alert">
 <?php
-    if(empty($_POST['namaPegawai'])){
 
-    }else{
+    if(isset($_POST['namaPegawai'])){
         $nama = $_POST['namaPegawai'];
         echo 'Nama Pegawai = '. $nama .'</br>';
     }
-    if(empty($_POST['agama'])){
-
-    }else{
+    if(isset($_POST['agama'])){
         $agama = $_POST['agama'];
         echo 'Agama = '. $agama .'</br>';
     }
-    if(empty($_POST['jabatan'])){
-
-    }else{
+    if(isset($_POST['jabatan'])){
         $jabatan = $_POST['jabatan'];
         echo 'Jabatan = '. $jabatan .'</br>';
     }
-    if(empty($_POST['status'])){
-
-    }else{
+    if(isset($_POST['status'])){
         $status = $_POST['status'];
         echo 'Status = '. $status .'</br>';
     }
-    if(empty($_POST['jumlahAnak'])){
-
-    }else{
+    if(isset($_POST['jumlahAnak'])){
         $anak = $_POST['jumlahAnak'];
         echo 'Jumlah Anak = '. $anak .'</br>';
     }
-
 ?>
 <?php
+if(isset($_POST['jabatan'])){
 switch($jabatan){
     case 'Manager':
         $gaji = 20000000;
@@ -115,11 +106,10 @@ switch($jabatan){
         echo 'Gaji Anda = Rp.'.number_format($gaji).'</br>'; 
         break;
 }
-
 $tunjab = $gaji * 0.2;
 echo 'Tunajangan Jabatan Rp.'.number_format($tunjab).'</br>';
-
-
+}
+if(isset($_POST['status'])){
 if($status == "Menikah"){
     if($anak <=2){
         $tunstat = $gaji * 0.05;
@@ -136,35 +126,18 @@ if($status == "Menikah"){
     echo 'Belum dapat Tunajangan Keluarga </br>';
     }
 
-
+if(isset($_POST['submit'])){
 $gajikotor = $gaji + $tunjab + $tunstat;
 echo 'Gaji Kotor = Rp.'.number_format($gajikotor).'</br>';
+}
 
 $zakat = ($agama == "Islam" && $gajikotor >=6000000) ? $gajikotor * 0.025 : 0;
 echo 'Zakat = Rp.'.number_format($zakat).'</br>';
 
 $gajibersih = $gajikotor - $zakat;
 echo 'Gaji Bersih = Rp.'.number_format($gajibersih);
+}
 ?>
 </div>
-
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-test
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
